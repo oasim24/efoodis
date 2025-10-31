@@ -89,7 +89,7 @@
                 
                 <td>
 
-                    <a href="{{ route('settings.edit', $setting->id) }}"
+                    <a href="{{ route('osinfos.edit', $info->id) }}"
                         class="btn btn-sm btn-primary">
                         Edit
                     </a>

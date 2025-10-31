@@ -26,6 +26,15 @@ public function edit($id)
     return view('admin.page.edit.setting', compact('setting'));
     
 }
+public function osedit($id)
+
+{   $osinfo = Osinfo::findOrFail($id);
+    
+   
+       
+    return view('admin.page.edit.osinfo', compact('osinfo'));
+    
+}
 
 
 
@@ -75,6 +84,31 @@ public function update(Request $request, $id)
 
 
 
+public function osupdate(Request $request, $id)
+{
+    try {
+        $osinfos = Osinfo::findOrFail($id);
+
+      
+        $validated = $request->validate([
+              'value' => 'required|string|max:255',
+              
+        ]);
+
+      
+       
+       
+
+             $osinfos->update($validated);
+
+        return redirect()->route('settings.index')->with('success', 'Settings updated successfully!');
+
+    } catch (\Exception $e) {
+        Log::error('Settings update failed: ' . $e->getMessage());
+
+        return redirect()->back()->withInput()->with('error', 'Failed to update Settings. Please try again.');
+    }
+}
 
 
 }

@@ -18,8 +18,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::middleware(['auth',])  
+    ->prefix('admin')                       
+    ->group(function () {
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -47,7 +49,20 @@ Route::delete('/brands/delete/{id}', [BrandController::class, 'delete'])->name('
 
 Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
 Route::get('/settings/edit/{id}', [SettingController::class, 'edit'])->name('settings.edit');
+Route::get('/othersettings/edit/{id}', [SettingController::class, 'osedit'])->name('osinfos.edit');
 Route::put('/settings/update/{id}', [SettingController::class, 'update'])->name('settings.update');
+Route::put('/othersettings/update/{id}', [SettingController::class, 'osupdate'])->name('osinfos.update');
+
+
+});
+
+
+
+
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');

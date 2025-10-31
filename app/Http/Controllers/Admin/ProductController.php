@@ -51,7 +51,7 @@ public function store(Request $request)
             $validated['thumbnail_image'] = upload_image(
                 $request->file('thumbnail_image'),
                 'uploads/products',
-                ['width' => 300, 'height' => 300]
+                ['width' => 150, 'height' => 150]
             );
         }
 
@@ -62,7 +62,7 @@ public function store(Request $request)
                 $galleryPaths[] = upload_image(
                     $img,
                     'uploads/products/feature',
-                    ['width' => 300, 'height' => 300]
+                    ['width' => 150, 'height' => 150]
                 );
             }
         }
@@ -136,7 +136,7 @@ public function update(Request $request, $id)
                 $request->file('thumbnail_image'),
                 $product->thumbnail_image, 
                 'uploads/products',
-                ['width' => 300, 'height' => 300]
+                ['width' => 150, 'height' => 150]
             );
         }
 
@@ -148,7 +148,7 @@ public function update(Request $request, $id)
                     $img,
                     $product->feature_image,
                     'uploads/products/feature',
-                    ['width' => 300, 'height' => 300]
+                    ['width' => 150, 'height' => 150]
                 );
             }
         }
