@@ -6,7 +6,7 @@
 }
 </style>
 
-<span style="font-weight: 700;">Top Categories</span>
+<h4 style="font-weight: 700;">Top Categories</h4>
 <hr>
 <div class="d-flex gap-3 align-items-center justify-content-center my-3">
     @foreach($category as $cat)

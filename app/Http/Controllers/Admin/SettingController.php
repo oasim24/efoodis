@@ -59,7 +59,7 @@ public function update(Request $request, $id)
                 $request->file('logo'),
                 $settings->logo, 
                 'uploads/settings',
-                ['width' => 150, 'height' => 80]
+                ['width' => 200, 'height' => 50]
             );
         }
         if ($request->hasFile('favicon')) {
@@ -67,7 +67,7 @@ public function update(Request $request, $id)
                 $request->file('favicon'),
                 $settings->favicon, 
                 'uploads/settings',
-                ['width' => 150, 'height' => 80]
+                ['width' => 30, 'height' => 30]
             );
         }
 

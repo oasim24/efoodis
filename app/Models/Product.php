@@ -20,4 +20,14 @@ class Product extends Model
         'category_id', 
         'brand_id', 
     ];
+
+
+public function category()
+{
+    return $this->belongsTo(Categories::class);
+}
+
+
+
+
 }

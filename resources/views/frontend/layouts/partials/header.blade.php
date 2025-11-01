@@ -87,8 +87,8 @@
 }
 
 .scroll-content {
-  display: inline-block;
-  padding-left: 100%; 
+  display: block;
+  padding-left: 100vh; 
   animation: scroll-text 20s linear infinite;
 }
 
@@ -105,6 +105,7 @@
 
 
 </style>
+<div class="container-fluid">
 <div class="row">
 
 
@@ -117,12 +118,17 @@
   </div>
 </div>
 </div>
+</div>
+
 <div class="container py-3">
+
+
+
     <div class="row align-items-center gy-3">
         
        
         <div class="col-12 col-md-3 text-center text-md-start">
-            <img src="{{ asset($setting->logo ?? '') }}" alt="Logo">
+           <a href="{{route('home')}}">  <img src="{{ asset($setting->logo ?? '') }}" alt="Logo"> </a>
         </div>
 
         

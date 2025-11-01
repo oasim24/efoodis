@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,12 @@ Route::post('/products/store', [ProductController::class, 'store'])->name('produ
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/update/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
+Route::put('/product/status/{id}', [ProductController::class, 'status'])->name('product.status');
+Route::put('/product/hotproducts/{id}', [ProductController::class, 'hots'])->name('product.hots');
+Route::put('/product/topsell/{id}', [ProductController::class, 'tops'])->name('product.tops');
+Route::put('/product/feature/{id}', [ProductController::class, 'features'])->name('product.features');
+
+
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
@@ -64,6 +71,6 @@ Route::put('/othersettings/update/{id}', [SettingController::class, 'osupdate'])
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/product/details/{slug}', [HomeController::class, 'details'])->name('product.details');
+

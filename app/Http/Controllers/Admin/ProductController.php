@@ -51,7 +51,7 @@ public function store(Request $request)
             $validated['thumbnail_image'] = upload_image(
                 $request->file('thumbnail_image'),
                 'uploads/products',
-                ['width' => 150, 'height' => 150]
+                ['width' => 145, 'height' => 160]
             );
         }
 
@@ -62,7 +62,7 @@ public function store(Request $request)
                 $galleryPaths[] = upload_image(
                     $img,
                     'uploads/products/feature',
-                    ['width' => 150, 'height' => 150]
+                    ['width' => 145, 'height' => 160]
                 );
             }
         }
@@ -136,7 +136,7 @@ public function update(Request $request, $id)
                 $request->file('thumbnail_image'),
                 $product->thumbnail_image, 
                 'uploads/products',
-                ['width' => 150, 'height' => 150]
+                ['width' => 145, 'height' => 160]
             );
         }
 
@@ -148,7 +148,7 @@ public function update(Request $request, $id)
                     $img,
                     $product->feature_image,
                     'uploads/products/feature',
-                    ['width' => 150, 'height' => 150]
+                    ['width' => 145, 'height' => 160]
                 );
             }
         }
@@ -201,6 +201,81 @@ public function delete($id)
         
     }
 }
+
+
+
+public function status($id)
+{
+    try {
+        $product = Product::findOrFail($id);
+
+        $product->status = $product->status ? 0 : 1;
+        $product->save();
+
+        return back()->with('success', 'Product status updated successfully.');
+    } catch (\Exception $e) {
+       
+        Log::error('Error updating product status: ' . $e->getMessage());
+
+        return back()->with('error', 'Failed to update product status. Please try again.');
+    }
+}
+
+public function hots($id)
+{
+    try {
+        $product = Product::findOrFail($id);
+
+        $product->hot = $product->hot ? 0 : 1;
+        
+        $product->save();
+
+        return back()->with('success', 'Product Hot updated successfully.');
+    } catch (\Exception $e) {
+       
+        Log::error('Error updating product Hot: ' . $e->getMessage());
+
+        return back()->with('error', 'Failed to update product Hot. Please try again.');
+    }
+}
+
+public function tops($id)
+{
+    try {
+        $product = Product::findOrFail($id);
+
+        $product->top_sell = $product->top_sell ? 0 : 1;
+        
+        $product->save();
+
+        return back()->with('success', 'Product Top updated successfully.');
+    } catch (\Exception $e) {
+       
+        Log::error('Error updating product Top: ' . $e->getMessage());
+
+        return back()->with('error', 'Failed to update product Top. Please try again.');
+    }
+}
+
+public function features($id)
+{
+    try {
+        $product = Product::findOrFail($id);
+
+        $product->feature = $product->feature ? 0 : 1;
+        
+        $product->save();
+
+        return back()->with('success', 'Product feature updated successfully.');
+    } catch (\Exception $e) {
+       
+        Log::error('Error updating feature Top: ' . $e->getMessage());
+
+        return back()->with('error', 'Failed to update product feature. Please try again.');
+    }
+}
+
+
 
 
 }

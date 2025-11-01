@@ -3,11 +3,19 @@
     border: 1px solid green;
     padding: 5px;
     position: relative;
+    background-color: white;
+    
 }
 .product_img{
     width: 100%;
-    height: 150px;
+    height: max-content;
     overflow: hidden;
+}
+
+.product_img img {
+   width: 100%;
+   height: 100%;
+
 }
 .product_img img:hover {
     transform: scale(1.2);
@@ -28,18 +36,46 @@
     padding: 5px;
     
 }
-</style>
-<div class="d-flex align-items-center justify-content-center gap-3">
-    @foreach($products as $product)
-    <div class="d-flex align-items-center justify-content-center flex-column cart">
-        <span class="dis bg-primary" > 10% </span>
-        <div class="product_img">
 
-            <img src="{{asset($product->thumbnail_image)}}">
+del{
+    font-size: 15px;
+    color: red;
+}
+.price{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: black;
+}
+</style>
+
+<div class="owl-carousel product owl-theme bg-light">
+    @foreach($products as $product)
+<a href="{{route('product.details', $product->slug)}}">
+    <div class="d-flex align-items-start justify-content-start flex-column cart">
+        @php
+    $discount = 0;
+    if ($product->old_price > 0) {
+        $discount = round((($product->old_price - $product->new_price) / $product->old_price) * 100);
+    }
+@endphp
+    
+    <span class="dis bg-primary">{{$discount}}%</span>
+        <div class="product_img">
+            <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}">
         </div>
-        <p class="m-0 my-1 ">{{$product->name}}</p>
-        <span> <del>৳{{$product->old_price}}</del> ৳{{$product->new_price}}</span>
-        <button class="btn btn-primary py-1 w-100 mt-2">Add To Cart</button>
+         <p class="m-0 my-1 text-start">{{ $product->name }}</p>
+        <span>
+            <del>৳{{ $product->old_price }}</del> <span class="price"> ৳{{ $product->new_price }}</span>
+        </span>
+        <button class="btn btn-sm btn-primary py-1 w-100 mt-2">Order Now</button>
     </div>
+    </a>
     @endforeach
 </div>

@@ -17,12 +17,12 @@
 <div class="container py-3">
 <div class="row ">
     <div class="col-md-3">
-        <img src="{{$setting->logo}}">
+        <img src="{{asset($setting->logo)}}">
         <p class="m-0 mb-1">{{$setting->phone}}</p>
         <p class="m-0 mb-1">{{$setting->email}}</p>
         <p class="m-0 mb-1">{{$setting->address}}</p>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-6">
         <p class="pp">Usefull Link</p>
         <ul class="ullist">
             <li><a href="#">Contact Us</a></li>
@@ -30,7 +30,7 @@
             <li><a href="#"> Deliveray Rulls </a></li>
         </ul>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-6">
         <p class="pp">Other Link</p>
         <ul class="ullist">
             <li><a href="#">All Products</a></li>

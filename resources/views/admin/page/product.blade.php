@@ -21,6 +21,10 @@
             <th>Name</th>
             <th>Product Code</th>
             <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Other</th>
+            <th>Image</th>
             <th>action</th>
         </tr>
     </thead>
@@ -31,6 +35,53 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->code }}</td>
             <td>${{ number_format($product->old_price, 2) }}</td>
+            <td>{{ $product->stock }}</td>
+            <td>
+    <form action="{{ route('product.status', $product->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('PUT')
+
+        <button type="submit" 
+                class="btn btn-sm {{ $product->status ? 'btn-success' : 'btn-danger' }}">
+            {{ $product->status ? 'Active' : 'Inactive' }}
+        </button>
+    </form>
+</td>
+
+<td>
+    <form action="{{ route('product.hots', $product->id) }}" method="POST" style="display:inline;" >
+        @csrf
+        @method('PUT')
+        <p>   Hot Product:
+        <button type="submit" 
+                class="btn btn-sm {{ $product->hot ? 'btn-success' : 'btn-danger' }}">
+            {{ $product->hot ? 'Yes' : 'No' }}
+        </button> </p>
+    </form> 
+
+   <form action="{{ route('product.features', $product->id) }}" method="POST" style="display:inline;" >
+        @csrf
+        @method('PUT')
+        <p>  Feature Product:
+        <button type="submit" 
+                class="btn btn-sm {{ $product->feature ? 'btn-success' : 'btn-danger' }}">
+            {{ $product->feature ? 'Yes' : 'No' }}
+        </button> </p>
+    </form> 
+  <form action="{{ route('product.tops', $product->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('PUT')
+          Top Selling Product:
+        <button type="submit" 
+                class="btn btn-sm {{ $product->top_sell ? 'btn-success' : 'btn-danger' }}">
+            {{ $product->top_sell ? 'Yes' : 'No' }}
+        </button>
+    </form>
+
+</td>
+
+
+            <td> <img src="{{asset($product->thumbnail_image)}}" width="100" height="100" > </td>
             <td>
    
     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">

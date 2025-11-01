@@ -21,6 +21,9 @@ protected $fillable = ['name', 'image', 'parent_id'];
     }
 
 
-
+public function products()
+{
+    return $this->hasMany(Product::class);
+}
 
 }

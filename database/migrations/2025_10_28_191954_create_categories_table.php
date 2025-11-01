@@ -47,8 +47,11 @@ return new class extends Migration {
             $table->decimal('new_price', 10, 2)->nullable();
             $table->decimal('stock', 10, 2)->nullable();
             $table->string('thumbnail_image')->nullable();
-            $table->string('feature_image')->nullable();
+            $table->string('feature_image')->length(512)->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('hot')->default(true);
+            $table->boolean('feature')->default(true);
+            $table->boolean('top_sell')->default(true);
             $table->timestamps();
         });
 
