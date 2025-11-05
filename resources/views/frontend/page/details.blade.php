@@ -148,7 +148,7 @@
 </style>
 @endpush
 @section('content')
-<div class="row mt-4">
+<div class="row mt-4 my-3">
     <div class="col-md-6 col-12">
         @php
             
@@ -194,7 +194,7 @@
 <div class="ribbon">Product Code</div>
        <div class="ribbon4">{{ $product->code }}</div><br>
 <div class="ribbon2">Category </div> 
-      <div class="ribbon3">{{$product->category->name}}</div>
+      <div class="ribbon3">{{$product->categories->name}}</div>
         <div class="d-flex align-items-center mt-3">
             <button id="minusQty" class="btn btn-outline-secondary px-3">-</button>
             <input id="qty" type="text" readonly class="form-control text-center mx-2" value="1" style="width:50px;">
@@ -288,32 +288,73 @@ $(document).ready(function(){
     thumbSlider.find(".owl-item").removeClass("active-thumb").eq(index).addClass("active-thumb");
   }
 
-  // Quantity Plus/Minus
-  $('#plusQty').on('click', function() {
-      var qty = parseInt($('#qty').val());
-      $('#qty').val(qty + 1);
-  });
+ 
+$(document).ready(function() {
+    // Quantity control
+    $('#plusQty').click(function() {
+        let qty = parseInt($('#qty').val());
+        $('#qty').val(qty + 1);
+    });
 
-  $('#minusQty').on('click', function() {
-      var qty = parseInt($('#qty').val());
-      if(qty > 1) $('#qty').val(qty - 1);
-  });
+    $('#minusQty').click(function() {
+        let qty = parseInt($('#qty').val());
+        if (qty > 1) {
+            $('#qty').val(qty - 1);
+        }
+    });
 
-  // Add to Cart Button
-  $('#add-to-cart').on('click', function(){
-      let qty = $('#qty').val();
-      alert('🛒 Added ' + qty + ' item(s) to your cart!');
-      // Ajax Request করতে পারো এখানে যদি চাও
-      // $.post('/add-to-cart', {product_id: {{ $product->id }}, qty: qty});
-  });
+    // 🛒 Add To Cart Button Click
+    $('#add-to-cart').click(function(e) {
+        e.preventDefault();
 
-  // Order Now Button
-  $('#order-now').on('click', function(){
-      let qty = $('#qty').val();
-      alert('🚀 Proceeding to Order with quantity: ' + qty);
-      // Redirect বা Checkout লজিক এখানে যোগ করো
-      // window.location.href = '/checkout?product_id={{ $product->id }}&qty=' + qty;
-  });
+        let data = {
+            _token: "{{ csrf_token() }}",
+            id: "{{ $product->id }}",
+            name: "{{ $product->name }}",
+            price: "{{ $product->new_price }}",
+            image: "{{ asset($product->thumbnail_image) }}",
+            quantity: $('#qty').val()
+        };
+
+        $.ajax({
+            url: "{{ route('cart.add') }}",
+            method: "POST",
+            data: data,
+            success: function(res) {
+                if (res.status) {
+                    alert(res.message);
+                    // Optional: update cart counter
+                    $('#cartCount').text(res.cart_count);
+                }
+            }
+        });
+    });
+
+    // ⚡ Order Now Button Click
+    $('#order-now').click(function(e) {
+        e.preventDefault();
+
+        let data = {
+            _token: "{{ csrf_token() }}",
+            id: "{{ $product->id }}",
+            name: "{{ $product->name }}",
+            price: "{{ $product->new_price }}",
+            image: "{{ asset($product->thumbnail_image) }}",
+            quantity: $('#qty').val()
+        };
+
+        $.ajax({
+            url: "{{ route('cart.orderNow') }}",
+            method: "POST",
+            data: data,
+            success: function(res) {
+                if (res.status && res.redirect_url) {
+                    window.location.href = res.redirect_url;
+                }
+            }
+        });
+    });
+});
 
 });
 </script>

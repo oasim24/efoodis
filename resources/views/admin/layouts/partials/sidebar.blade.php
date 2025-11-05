@@ -7,6 +7,20 @@ $menus = [
         'submenu' => [],
     ],
     [
+        'name' => 'Orders',
+        'route' => '#',
+        'icon' => 'bi bi-speedometer2',
+        'submenu' => [
+             [
+                'name' => 'All Orders',
+                'route' => 'orders.index',
+                'icon' => 'bi bi-box-seam',
+            ],
+            
+            
+            ],
+    ],
+    [
         'name' => 'Products',
         'route' => '#',
         'icon' => 'bi bi-box',
@@ -34,8 +48,18 @@ $menus = [
         'icon' => 'bi bi-box',
         'submenu' => [
             [
-                'name' => 'settings',
+                'name' => 'Settings',
                 'route' => 'settings.index',
+                'icon' => 'bi bi-box-seam',
+            ],
+            [
+                'name' => 'Roles',
+                'route' => 'roles.index',
+                'icon' => 'bi bi-box-seam',
+            ],
+            [
+                'name' => 'Users',
+                'route' => 'users.index',
                 'icon' => 'bi bi-box-seam',
             ],
             
@@ -43,14 +67,14 @@ $menus = [
         ],
     ],
 ];
-$currentRoute = Route::currentRouteName(); // এখনকার রাউট
+$currentRoute = Route::currentRouteName(); 
 @endphp
 
 <style>
 .sidebar {
     width: 15%;
     background: #ffffffff;
-   height: calc(100vh - 50px);
+   height: calc(100vh - 60px);
    position: absolute;
    left: 0;
    bottom: 0;
@@ -107,7 +131,7 @@ $currentRoute = Route::currentRouteName(); // এখনকার রাউট
             $isSubActive = collect($menu['submenu'])->pluck('route')->contains($currentRoute);
         @endphp
 
-        {{-- সাবমেনু থাকলে --}}
+        
         @if(!empty($menu['submenu']))
             <div class="menu menu-has-sub">
                 <a href="#" class="menu-link {{ $isSubActive ? 'active' : '' }}" data-target="submenu-{{ $index }}">
@@ -147,12 +171,8 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const targetId = this.getAttribute('data-target');
             const submenu = document.getElementById(targetId);
-
-            // সাবমেনু টগল
             submenu.classList.toggle('open');
-
-            // একটিমাত্র মেনু খোলা রাখতে চাইলে নিচের লাইন আনকমেন্ট করো:
-            // document.querySelectorAll('.submenu').forEach(s => { if (s !== submenu) s.classList.remove('open'); });
+            document.querySelectorAll('.submenu').forEach(s => { if (s !== submenu) s.classList.remove('open'); });
         });
     });
 });

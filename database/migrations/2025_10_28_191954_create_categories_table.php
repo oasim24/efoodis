@@ -37,7 +37,7 @@ return new class extends Migration {
 
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('categories_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
             $table->string('name');
             $table->string('slug')->unique()->nullable();
@@ -55,20 +55,32 @@ return new class extends Migration {
             $table->timestamps();
         });
 
+  
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('invoice')->unique();
-            $table->integer('quantity')->default(1);
-            $table->decimal('amount', 10, 2)->default(0);
+            $table->string('delivary')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('payment')->nullable();
             $table->string('status')->nullable();
+            $table->timestamps();
+        });
+              Schema::create('order_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->string('name');
+            $table->string('image');
+            $table->integer('quantity')->default(1);
+            $table->decimal('price', 10, 2)->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('order_items');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('products');
         Schema::dropIfExists('customers');

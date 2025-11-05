@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -20,10 +21,10 @@ class HomeController extends Controller
 
 public function details($slug)
 {
-    $product = Product::where('slug', $slug)->with('category')->firstOrFail();
+    $product = Product::where('slug', $slug)->with('categories')->firstOrFail();
 
     
-    $relatedProducts = Product::where('category_id', $product->category_id)
+    $relatedProducts = Product::where('categories_id', $product->category_id)
         ->where('id', '!=', $product->id) 
         ->where('status', 1) 
         ->take(10) 
@@ -32,5 +33,38 @@ public function details($slug)
 
     return view('frontend.page.details', compact('product', 'relatedProducts'));
 }
+
+
+
+public function categories(Request $request, $id)
+{
+    
+    $categories = Categories::where('parent_id', $id)->get();
+
+   
+    $minPrice = Product::min('new_price');
+    $maxPrice = Product::max('new_price');
+
+   
+    $cats = Categories::with(['products' => function ($query) use ($request, $minPrice, $maxPrice) {
+        
+        if ($request->has('min_price') && $request->min_price != null) {
+            $query->where('new_price', '>=', $request->min_price);
+        }
+        if ($request->has('max_price') && $request->max_price != null) {
+            $query->where('new_price', '<=', $request->max_price);
+        }
+    }])->findOrFail($id);
+
+  
+    return view('frontend.page.categories', compact('cats', 'categories', 'id', 'minPrice', 'maxPrice'));
+}
+
+
+
+
+
+
+
 
 }

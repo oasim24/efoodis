@@ -102,7 +102,18 @@
   }
 }
 
-
+.cart-container{
+  position: relative;
+}
+.cart-count{
+  position: absolute;
+  top: -15px;
+  right: -20px;
+  font-size: 16px;
+  padding: 3px 8px;
+  background-color: #07633dff;
+  border-radius: 100%;
+}
 
 </style>
 <div class="container-fluid">
@@ -128,7 +139,7 @@
         
        
         <div class="col-12 col-md-3 text-center text-md-start">
-           <a href="{{route('home')}}">  <img src="{{ asset($setting->logo ?? '') }}" alt="Logo"> </a>
+           <a href="{{route('home')}}">  <img src="{{ asset($setting->logo ?? 'assets/image/companies/logo.png') }}" alt="Logo" width="200px" height="50px"> </a>
         </div>
 
         
@@ -141,15 +152,17 @@
             </form>
         </div>
 
-       
-        <div class="col-12 col-md-3">
+       @php
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+@endphp
+        <div class="col-12 col-md-3 d-flex align-items-center justify-content-between">
             <ul class="list-inline text-center text-md-end mb-0 header-links">
                 <li class="list-inline-item"><a href="#">Track Order</a></li>
                 <li class="list-inline-item"><a href="#">Login</a>/<a href="#">Sign Up</a></li>
-                <li class="list-inline-item">
-                    <a href="#"><i class="bi bi-cart3 fs-5"></i></a>
-                </li>
-            </ul>
+                
+              </ul>
+              <button class="btn btn-primary btn-sm cart-container" ><i class="bi bi-cart3 fs-5"></i> <span id="cartCount" class="cart-count">{{ $cartCount }}</span></button>
         </div>
     </div>
 </div>
@@ -157,12 +170,12 @@
 <div class="bg-primary text-white d-flex align-items-center justify-content-center">
     <ul class="list-unstyled d-flex gap-3 m-0 menu" >
         @foreach($category as $cat)
-        <li class="py-2"><a href="#" class="text-white text-decoration-none w-100">{{$cat->name}}</a>
+        <li class="py-2"><a href="{{route('categories', $cat->id)}}" class="text-white text-decoration-none w-100">{{$cat->name}}</a>
          @if($cat->children->isNotEmpty())
          <i class="bi bi-box"></i>
         <ul class="list-unstyled submenu">
              @foreach($cat->children as $child)
-            <li class="py-1 "><a href="#" class="text-white text-decoration-none w-100" >{{$child->name}}</a></li>
+            <li class="py-1 "><a href="{{route('categories', $child->id)}}" class="text-white text-decoration-none w-100" >{{$child->name}}</a></li>
             @endforeach
          </ul>
          @endif

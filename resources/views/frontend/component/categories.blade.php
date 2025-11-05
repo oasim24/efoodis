@@ -10,9 +10,9 @@
 <hr>
 <div class="d-flex gap-3 align-items-center justify-content-center my-3">
     @foreach($category as $cat)
-    <a href="#" class="text-decoration-none text-danger"> 
+    <a href="{{route('categories', $cat->id)}}" class="text-decoration-none text-danger"> 
     <div class="d-flex align-items-center justify-content-center flex-column">
-        <img src="{{asset($cat->image)}}" class="img" >
+        <img src="{{asset($cat->image ?? 'assets/image/categories/category.png')}}" class="img" width="100px" height="100px" >
         <p class="text-black" >{{$cat->name}}</p>
     </div>
     </a>

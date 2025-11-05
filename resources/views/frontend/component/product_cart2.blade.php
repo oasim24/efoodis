@@ -55,9 +55,9 @@ a:hover{
 }
 </style>
 
-<div class="owl-carousel product owl-theme bg-light">
+<div class=" row m-0 p-0">
     @foreach($products as $product)
-<a href="{{route('product.details', $product->slug)}}">
+<a href="{{route('product.details', $product->slug)}}" class="col-md-3" >
     <div class="d-flex align-items-start justify-content-start flex-column cart">
         @php
     $discount = 0;

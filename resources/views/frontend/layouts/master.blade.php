@@ -8,7 +8,7 @@
     <title>@yield('title', config('app.name', 'Laravel'))</title>
 
     {{-- Favicon --}}
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" href="{{ asset( $setting->favicon ?? 'assets/image/companies/favicon.png') }}">
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -95,10 +95,10 @@ $(document).ready(function(){
     loop: true,
     margin: 15,
     autoplay: true,
-    autoplayTimeout: 3000, // ৩ সেকেন্ড পর পর স্লাইড পরিবর্তন
-    autoplayHoverPause: true, // হোভার করলে থেমে যাবে
-    dots: true,
-    nav: true,
+    autoplayTimeout: 3000, 
+    autoplayHoverPause: true, 
+    dots: false,
+    nav: false,
     responsive:{
       0:{
         items:2
@@ -113,16 +113,44 @@ $(document).ready(function(){
         items:5
       },
       1140:{
-        items:6
+        items:5
       }
     }
   });
 });
 </script>
 
+<script>
+$(document).ready(function() {
+    $('.addToCartBtn').click(function(e) {
+        e.preventDefault();
 
+        let id = $(this).data('id');
+        let name = $(this).data('name');
+        let price = $(this).data('price');
+        let image = $(this).data('image');
+        let quantity = $(this).data('quantity');
 
-
+        $.ajax({
+            url: "{{ route('cart.add') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                name: name,
+                price: price,
+                image: image,
+                quantity: quantity
+            },
+            success: function(response) {
+                alert(response.message);
+            
+                $('#cartCount').text(response.cart_count);
+            }
+        });
+    });
+});
+</script>
     @stack('scripts')
 </body>
 </html>

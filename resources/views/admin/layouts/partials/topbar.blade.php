@@ -1,7 +1,7 @@
 <style>
 .topbar {
     width: 100%;
-    height: 50px;
+    height: 60px;
     background-color: white;
     border-bottom: 1px solid black;
     position: absolute;
@@ -50,9 +50,9 @@
 }
 </style>
 
-<div class="topbar row">
+<div class="topbar row  px-3">
     <div class="col-5 col-md-2">
-        <img src="{{ asset('assets/image/logo.png') }}" alt="Logo">
+        <img src="{{ asset($setting->logo ?? 'assets/image/companies/logo.png') }}" alt="Logo" width="200px" height="50px">
     </div>
     <div class="col-md-7"></div>
     <div class="col-md-3">

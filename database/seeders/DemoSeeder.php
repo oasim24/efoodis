@@ -12,23 +12,21 @@ class DemoSeeder extends Seeder
     {
         // --- Categories ---
         $categories = [
-            ['name' => 'Electronics', 'image' => 'electronics.jpg', 'parent_id' => null],
-            ['name' => 'Mobiles', 'image' => 'mobiles.jpg', 'parent_id' => 1],
-            ['name' => 'Laptops', 'image' => 'laptops.jpg', 'parent_id' => 1],
-            ['name' => 'Fashion', 'image' => 'fashion.jpg', 'parent_id' => null],
-            ['name' => 'Men', 'image' => 'men.jpg', 'parent_id' => 4],
-            ['name' => 'Women', 'image' => 'women.jpg', 'parent_id' => 4],
+            ['name' => 'পিঠা', 'image' => 'assets/image/categories/category.png', 'parent_id' => null],
+            ['name' => 'আচার', 'image' => 'assets/image/categories/category.png', 'parent_id' => null],
+            ['name' => 'নাট্স', 'image' => 'assets/image/categories/category.png', 'parent_id' => null],
+           
         ];
 
         DB::table('categories')->insert($categories);
 
         // --- Brands ---
         $brands = [
-            ['name' => 'Apple', 'image' => 'apple.jpg'],
-            ['name' => 'Samsung', 'image' => 'samsung.jpg'],
-            ['name' => 'HP', 'image' => 'hp.jpg'],
-            ['name' => 'Nike', 'image' => 'nike.jpg'],
-            ['name' => 'Adidas', 'image' => 'adidas.jpg'],
+            ['name' => 'গ্রামীণ পিঠা', 'image' => 'assets/image/brands/brands.png'],
+            ['name' => 'ঘরোয়া পিঠা', 'image' => 'assets/image/brands/brands.png'],
+            ['name' => 'সখের পিঠা', 'image' => 'assets/image/brands/brands.png'],
+            ['name' => 'স্বাদের পিঠা', 'image' => 'assets/image/brands/brands.png'],
+            
         ];
 
         DB::table('brands')->insert($brands);
@@ -36,24 +34,24 @@ class DemoSeeder extends Seeder
         // --- Customers ---
         $customers = [
             [
-                'name' => 'John Doe',
+                'name' => 'ওয়াসিম মিয়া',
                 'phone' => '0123456789',
                 'email' => 'john@example.com',
-                'address' => '123 Street',
-                'city' => 'New York',
-                'zone' => 'Zone A',
-                'area' => 'Area 1',
-                'image' => 'john.jpg',
+                'address' => 'চর আমলাব, বেলাব, নরসিংদী, ঢাকা, ',
+                'city' => 'ঢাকা',
+                'zone' => 'নরসিংদী',
+                'area' => 'বেলাব',
+                'image' => 'assets/image/customars/photo.png',
             ],
             [
-                'name' => 'Jane Smith',
+                'name' => 'ইঞ্জি: আক্তারুজ্জামান',
                 'phone' => '0987654321',
                 'email' => 'jane@example.com',
-                'address' => '456 Avenue',
-                'city' => 'Los Angeles',
-                'zone' => 'Zone B',
-                'area' => 'Area 2',
-                'image' => 'jane.jpg',
+                'address' => 'উত্তর গাবতলি, সঙ্গিতা, নরসিংদী সদর, নরসিংদী, ঢাকা',
+                'city' => 'ঢাকা',
+                'zone' => 'নরসিংদী ',
+                'area' => 'নরসিংদী সদর',
+                'image' => 'assets/image/customars/photo.png',
             ],
         ];
 
@@ -62,44 +60,63 @@ class DemoSeeder extends Seeder
         // --- Products ---
         $products = [
             [
-                'category_id' => 2,
+                'categories_id' => 1,
                 'brand_id' => 1,
-                'name' => 'iPhone 15 Pro',
-                'slug' => Str::slug('iPhone 15 Pro'),
-                'code' => 'IPH15P',
-                'description' => 'Latest iPhone model with advanced features.',
-                'old_price' => 1200,
-                'new_price' => 1100,
-                'stock' => 110,
-                'thumbnail_image' => 'iphone15_thumb.jpg',
+                'name' => 'নকশি পিঠা',
+                'slug' => Str::slug('নকশি পিঠা'),
+                'code' => 'P01',
+                'description' => '✅ নকশি পিঠা হচ্ছে গ্রাম্য পরিবেশে তৈরি করা একটি শৈল্পিক পিঠা যা শহর অঞ্চলে দেখা যায় না বললেই চলে
+💥 ব্যস্ততার কারণে এখন অনেকেই আছে পিঠাগুলো এখন তৈরি করতে পারছে না তাই পৌঁছে দেওয়া আপনাদের জন্য নিয়ে এসেছে নরম মুচমুচে ঐতিহ্যবাহী এই নকশী পিঠাগুলো 
+
+🔰 আমাদের পিঠাগুলো অত্যন্ত সুস্বাদু ও মজাদারও মুচমুচে আপনি নিশ্চিন্তে অর্ডার করতে পারেন 
+
+🔰 আমাদের পিঠাগুলো ।
+১০০% কেমিকেল মুক্ত
+১০০% Raw
+১০০% অর্গানিক
+☎ বিস্তারিত জানতে আমাদের পেজে মেসেজ করুন অথবা ফোন করুনঃ
+📳 01716342167
+
+👉 রিভিউ দিন ( এখানে ক্লিক করুন ) আপনার রিভিউ বা মতামত আমাদের নিকট অতি গুরুত্বপূর্ন',
+                'old_price' => 690,
+                'new_price' => 590,
+                'stock' => 10,
+                'thumbnail_image' => 'assets/image/products/product.png',
                 'feature_image' => 'iphone15_feature.jpg',
                 'status' => true,
             ],
             [
-                'category_id' => 3,
-                'brand_id' => 3,
-                'name' => 'HP Spectre x360',
-                'slug' => Str::slug('HP Spectre x360'),
-                'code' => 'HPSX360',
-                'description' => 'Premium convertible laptop.',
-                'old_price' => 1500,
-                'new_price' => 1350,
-                'stock' => 135,
-                'thumbnail_image' => 'hp_spectre_thumb.jpg',
+                'categories_id' => 1,
+                'brand_id' => 1,
+                'name' => 'ঝিনুক পিঠা',
+                'slug' => Str::slug('ঝিনুক পিঠা'),
+                'code' => 'P02',
+                'description' => '✅ খুবই সফট ও নরম মুচমুচে ঝিনুক পিঠা হচ্ছে গ্রামীন ঐতিহ্যের প্রতিক ও একটি শৈল্পিক পিঠা যা শহর অঞ্চলে দেখা যায় না বললেই চলে. ⚡ প্রতিটি কামড়ে একটি গল্প বলে.
+
+💥 ঝিনুক পিঠা দেখতে যেমন সুন্দর. খেতে আরোও মজাদার. কিন্তু এটাই সত্যি যে ব্যস্ততার কারণে এখন অনেকেই আছে পিঠাগুলো এখন তৈরি করতে পারছে না তাই গ্রামীন ঐতিহ্য আপনাদের জন্য নিয়ে এসেছে নরম মুচমুচে ঐতিহ্যবাহী এই খুবই সফট নরম ঝিনুক পিঠাগুলো 
+
+🔰 আমাদের পিঠাগুলো অত্যন্ত সুস্বাদু ও মজাদারও মুচমুচে আপনি নিশ্চিন্তে অর্ডার করতে পারেন',
+                'old_price' => 690,
+                'new_price' => 590,
+                'stock' => 20,
+                'thumbnail_image' => 'assets/image/products/product.png',
                 'feature_image' => 'hp_spectre_feature.jpg',
                 'status' => true,
             ],
             [
-                'category_id' => 5,
-                'brand_id' => 4,
-                'name' => 'Nike Air Max',
-                'slug' => Str::slug('Nike Air Max'),
-                'code' => 'NIKEAM',
-                'description' => 'Stylish and comfortable shoes.',
-                'old_price' => 150,
-                'new_price' => 120,
+                'categories_id' => 2,
+                'brand_id' => 2,
+                'name' => 'রসুনের আচার',
+                'slug' => Str::slug('রসুনের আচার'),
+                'code' => 'P03',
+                'description' => '🧄🌶️ রসুনের আচার - শুধু স্বাদেই নয়, উপকারিতায়ও ভরপুর! 🌶️🧄
+"স্বাদে ঘ্রাণে মন ভরে যায়, শরীর ভালো থাকে!"
+ঘরেই বানানো, খাঁটি রসুনের আচার এখন আপনার হাতের নাগালে! 😋
+কোনো কেমিক্যাল নয়, কোনো প্রিজারভেটিভ নয় — শুধুই খাঁটি উপাদান আর মায়ের মমতা! ❤️ efoodis.com',
+                'old_price' => 690,
+                'new_price' => 590,
                 'stock' => 12,
-                'thumbnail_image' => 'nike_airmax_thumb.jpg',
+                'thumbnail_image' => 'assets/image/products/product.png',
                 'feature_image' => 'nike_airmax_feature.jpg',
                 'status' => true,
             ],
@@ -108,21 +125,28 @@ class DemoSeeder extends Seeder
         DB::table('products')->insert($products);
 
         // --- Orders ---
+
+
+
+
+
+
+
         $orders = [
             [
                 'customer_id' => 1,
-                'product_id' => 1,
                 'invoice' => 'INV-' . strtoupper(Str::random(6)),
-                'quantity' => 1,
-                'amount' => 1100,
+                'delivary' => '60',
+                'amount' => '590',
+                'payment' => 'Cash-On-Delivary',
                 'status' => 'pending',
             ],
             [
                 'customer_id' => 2,
-                'product_id' => 3,
                 'invoice' => 'INV-' . strtoupper(Str::random(6)),
-                'quantity' => 2,
-                'amount' => 240,
+                'delivary' => '120',
+                'amount' => '1180',
+                'payment' => 'Bkash',
                 'status' => 'completed',
             ],
         ];
@@ -130,6 +154,29 @@ class DemoSeeder extends Seeder
         DB::table('orders')->insert($orders);
 
 
+
+ $order_items = [
+            [
+                'order_id' => 1,
+                'name' => 'নকশি পিঠা',
+                'image' => 'assets/image/products/product.png',
+                'quantity' => 1 ,
+                'price' => 590,
+                'amount' => 590,
+                
+            ], 
+            [
+                'order_id' => 2,
+                'name' => 'নকশি পিঠা',
+                'image' => 'assets/image/products/product.png',
+                'quantity' => 2 ,
+                'price' => 590,
+                'amount' => 1180,
+                
+            ], 
+            
+        ];
+            DB::table('order_items')->insert($order_items);
 
 
 
@@ -140,8 +187,8 @@ class DemoSeeder extends Seeder
                 'phone' => '01828509632',
                 'email' => 'efoodis24@gmail.com' ,
                 'address' => 'Dhaka Bangladesh',
-                'logo' => 'logo.png',
-                'favicon' => 'icon.png',
+                'logo' => 'assets/image/companies/logo.png',
+                'favicon' => 'assets/image/companies/favicon.png',
             ], 
         ];
             DB::table('settings')->insert($settings);

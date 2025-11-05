@@ -17,7 +17,7 @@
 <div class="container py-3">
 <div class="row ">
     <div class="col-md-3">
-        <img src="{{asset($setting->logo)}}">
+        <img src="{{asset($setting->logo)}}" width="200px" height="50px">
         <p class="m-0 mb-1">{{$setting->phone}}</p>
         <p class="m-0 mb-1">{{$setting->email}}</p>
         <p class="m-0 mb-1">{{$setting->address}}</p>

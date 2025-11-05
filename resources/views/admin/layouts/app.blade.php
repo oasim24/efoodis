@@ -8,7 +8,7 @@
     <title>@yield('title', config('app.name', 'Laravel'))</title>
 
     {{-- Favicon --}}
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" href="{{ asset($setting->favicon ?? 'assets/image/companies/favicon.png') }}">
 
     {{-- Fonts & Icons --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,6 +20,8 @@
     {{-- Custom Styles --}}
   
 <style>
+
+ 
 
 #commonTable{
     width: 100%;
@@ -104,6 +106,7 @@
         </div>
     </div>
 
+ 
     {{-- Footer --}}
 
     {{-- Bootstrap JS --}}

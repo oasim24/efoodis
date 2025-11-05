@@ -44,4 +44,7 @@
 @include('frontend.component.product_cart', ['products' => $all])
 @endif
 </div>
+@if(!empty($cart))
+@include('frontend.component.cart_drawer', ['cart' => $cart])
+@endif
 @endsection
