@@ -14,7 +14,7 @@
         @method('PUT')
     @endif
 
-    <div class="row">
+    <div class="row m-0 p-0">
 
     
         <x-input 

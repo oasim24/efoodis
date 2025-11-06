@@ -3,90 +3,64 @@
 @section('title', 'Role & Permission Management')
 
 @section('content')
-<div class="py-5">
 
-    <h2 class="mb-4 text-center">🔐 Role & Permission Management</h2>
+<div class="d-flex my-3 align-items-center justify-content-between">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Roles</li>
+  </ol>
+</nav>
+    <a href="{{route('roles.create')}}" class="btn btn-primary">Create</a>
 
-    {{-- Flash Messages --}}
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+</div>
 
-    {{-- Create Role Form --}}
-    <div class="card mb-5 shadow-sm">
-        <div class="card-header bg-dark text-white">
-            <strong>Create New Role with Permissions</strong>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('roles.store') }}" method="POST">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-md-5">
-                        <label for="name" class="form-label">Role Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="e.g. Editor" required>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control" placeholder="e.g. editor" required>
-                    </div>
-                </div>
 
-                <hr>
-
-                <h5 class="mb-3">Assign Permissions</h5>
-                <div class="row">
-                    @foreach ($permissions as $permission)
-                        <div class="col-md-3 mb-2">
-                            <div class="form-check">
-                                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="perm_{{ $permission->id }}" class="form-check-input">
-                                <label for="perm_{{ $permission->id }}" class="form-check-label">
-                                    {{ $permission->name }}
-                                </label>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Create Role with Permissions
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    {{-- Existing Roles --}}
-    <div class="card">
-        <div class="card-header bg-secondary text-white">
-            <strong>Existing Roles & Permissions</strong>
-        </div>
-        <div class="card-body">
-            @forelse ($roles as $role)
-                <div class="mb-4 border p-3 rounded">
-                    <h5 class="mb-2">
-                        <strong>{{ ucfirst($role->name) }}</strong>
-                        <span class="text-muted">({{ $role->slug }})</span>
-                    </h5>
-
+<table id="commonTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Role</th>
+          
+            <th>Permission</th>
+            <th>action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($roles as $index => $role)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $role->name }}</td>
+            <td>
                     @if ($role->permissions->count())
                         <ul class="list-inline">
                             @foreach ($role->permissions as $perm)
                                 <li class="list-inline-item badge bg-success">{{ $perm->name }}</li>
                             @endforeach
                         </ul>
-                    @else
-                        <p class="text-muted">No permissions assigned.</p>
                     @endif
-                </div>
-            @empty
-                <p>No roles found.</p>
-            @endforelse
-        </div>
-    </div>
+            </td>       
+            <td>
+   
+    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary">
+        Edit
+    </a>
 
-</div>
+  
+    <form action="{{ route('roles.delete', $role->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger">
+            Delete
+        </button>
+    </form>
+    </td>
+
+        </tr>
+        @endforeach
+      
+    </tbody>
+</table>
+
+
 @endsection

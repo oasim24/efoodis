@@ -37,7 +37,7 @@
             <td>${{ number_format($product->old_price, 2) }}</td>
             <td>{{ $product->stock }}</td>
             <td>
-    <form action="{{ route('product.status', $product->id) }}" method="POST" style="display:inline;">
+    <form action="{{ route('products.status', $product->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('PUT')
 
@@ -49,7 +49,7 @@
 </td>
 
 <td>
-    <form action="{{ route('product.hots', $product->id) }}" method="POST" style="display:inline;" >
+    <form action="{{ route('products.hots', $product->id) }}" method="POST" style="display:inline;" >
         @csrf
         @method('PUT')
         <p>   Hot Product:
@@ -59,7 +59,7 @@
         </button> </p>
     </form> 
 
-   <form action="{{ route('product.features', $product->id) }}" method="POST" style="display:inline;" >
+   <form action="{{ route('products.features', $product->id) }}" method="POST" style="display:inline;" >
         @csrf
         @method('PUT')
         <p>  Feature Product:
@@ -68,7 +68,7 @@
             {{ $product->feature ? 'Yes' : 'No' }}
         </button> </p>
     </form> 
-  <form action="{{ route('product.tops', $product->id) }}" method="POST" style="display:inline;">
+  <form action="{{ route('products.tops', $product->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('PUT')
           Top Selling Product:

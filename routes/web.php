@@ -21,7 +21,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 
 
-Route::middleware(['auth',])  
+Route::middleware(['auth','permission'])  
     ->prefix('admin')                       
     ->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -32,10 +32,10 @@ Route::post('/products/store', [ProductController::class, 'store'])->name('produ
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/update/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
-Route::put('/product/status/{id}', [ProductController::class, 'status'])->name('product.status');
-Route::put('/product/hotproducts/{id}', [ProductController::class, 'hots'])->name('product.hots');
-Route::put('/product/topsell/{id}', [ProductController::class, 'tops'])->name('product.tops');
-Route::put('/product/feature/{id}', [ProductController::class, 'features'])->name('product.features');
+Route::put('/products/status/{id}', [ProductController::class, 'status'])->name('products.status');
+Route::put('/products/hotproducts/{id}', [ProductController::class, 'hots'])->name('products.hots');
+Route::put('/products/topsell/{id}', [ProductController::class, 'tops'])->name('products.tops');
+Route::put('/products/feature/{id}', [ProductController::class, 'features'])->name('products.features');
 
 
 
@@ -45,8 +45,8 @@ Route::get('/orders/{status}', [OrderController::class, 'status'])->name('orders
 Route::post('/orders/update-status', [OrderController::class, 'updateStatus'])
     ->name('orders.updateStatus');
 
-Route::post('/orders/update-multiple-status', [OrderController::class, 'updateMultipleStatus'])
-    ->name('orders.updateMultipleStatus');
+Route::post('/orders/multiple-status', [OrderController::class, 'MultipleStatus'])
+    ->name('orders.MultipleStatus');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -70,8 +70,11 @@ Route::put('/settings/update/{id}', [SettingController::class, 'update'])->name(
 Route::put('/othersettings/update/{id}', [SettingController::class, 'osupdate'])->name('osinfos.update');
 
 Route::get('/role', [RoleController::class, 'index'])->name('roles.index');
+Route::get('/role/create', [RoleController::class, 'create'])->name('roles.create');
 Route::post('/role/store', [RoleController::class, 'store'])->name('roles.store');
-Route::put('/role/update/{$id}', [RoleController::class, 'update'])->name('roles.update');
+Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+Route::put('/role/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+Route::delete('/role/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete');
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

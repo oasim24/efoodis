@@ -14,7 +14,7 @@
         @method('PUT')
     @endif
 
-    <div class="row">
+    <div class="row p-0 m-0">
 
      <x-select 
         name="parent_id" 

@@ -51,7 +51,7 @@
 <div class="my-4 m-0 row p-0">
 
        @foreach($statusList as $value => $text)
-    <a href="{{route('orders.status', $value)}}" class="col-md-3 my-3">
+    <a href="{{route('orders.status', $value)}}" class="col-md-2 my-3">
     <div class="card status-card text-center shadow-sm" style=" cursor: pointer;">
         <div class="card-body">
              <h2 class="card-title count">{{ $statusCounts[$value] }}</h2>
@@ -249,7 +249,7 @@ $('#multiStatusSelect').on('change', function() {
         }
 
         $.ajax({
-            url: "{{ route('orders.updateMultipleStatus') }}",
+            url: "{{ route('orders.MultipleStatus') }}",
             type: "POST",
             data: {
                 _token: "{{ csrf_token() }}",

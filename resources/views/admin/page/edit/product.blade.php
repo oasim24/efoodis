@@ -14,7 +14,7 @@
         @method('PUT')
     @endif
 
-    <div class="row">
+    <div class="row m-0 p-0">
         <x-input 
             name="name" 
             label="Product Name" 
@@ -76,7 +76,7 @@
     />
     </div>
 
-    <div class="row">
+    <div class="row m-0 p-0">
         <x-image-upload 
             name="thumbnail_image"
             label="Thumbnail Image"

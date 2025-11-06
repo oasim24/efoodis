@@ -30,7 +30,7 @@ public function updateStatus(Request $request)
     return response()->json(['success' => true]);
 }
 
-public function updateMultipleStatus(Request $request)
+public function MultipleStatus(Request $request)
 {
     $request->validate([
         'ids' => 'required|array',
